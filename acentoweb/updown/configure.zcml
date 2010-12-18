@@ -2,10 +2,15 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:contentratings="http://namespaces.plone.org/contentratings"
     i18n_domain="acentoweb.updown">
 
   <five:registerPackage package="." initialize=".initialize" />
+
+  <!-- Include configuration for dependencies listed in setup.py -->
+  <includeDependencies package="." />
 
   <genericsetup:registerProfile
       name="default"
@@ -15,5 +20,27 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   <!-- -*- extra stuff goes here -*- -->
-  
+  <utility
+      name="acentoweb.updown.updown_vocab"
+      component=".vocabulary.updown_vocab"
+      />
+
+  <browser:page
+      for="contentratings.interfaces.IUserRating"
+      class=".browser.UpDownView"
+      permission="zope.Public"
+      allowed_attributes="rate remove_rating"
+      name="updown_view"
+      template="updown.pt"
+      />
+
+  <contentratings:category
+      for="Products.CMFCore.interfaces.IDynamicType"
+      title="UpDown"
+      name="acentoweb.updown.UpDownCategory"
+      view_name="updown_view"
+      read_expr="python: checkPermission('Content Ratings: View User Rating', context)"
+      write_expr="python: checkPermission('Content Ratings: User Rate', context)"
+      />
+
 </configure>
