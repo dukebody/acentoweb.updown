@@ -20,6 +20,13 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   <!-- -*- extra stuff goes here -*- -->
+
+  <!-- Resource directory -->
+  <browser:resourceDirectory
+      name="acentoweb.updown.resources"
+      directory="resources"
+      />
+
   <utility
       name="acentoweb.updown.updown_vocab"
       component=".vocabulary.updown_vocab"

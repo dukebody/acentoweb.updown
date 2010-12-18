@@ -2,7 +2,7 @@
      i18n:domain="acentoweb.updown"
      tal:define="view_url string:${view/content_url}/++${view/traversal_name}++${context/name};
                  current view/current_rating;
-                 star_size view/star_size|python:25;
+                 star_size view/star_size|python:100;
                  values view/vocabulary;
                  count python:len(values);
                  base_width python:count*star_size;
@@ -13,20 +13,17 @@
 <div class="AverageRating"
      tal:condition="context/can_read">
   <label>
-    <span class="RatingTitle"
-          tal:content="context/title">Título</span>
+    <span class="RatingTitle">Average</span>
     <span class="VoteCount"
           i18n:translate="user_vote_count">
           (<span tal:omit-tag=""
-                   tal:content="context/numberOfRatings"/>)</span>
+                   tal:content="context/numberOfRatings"
+                   i18n:name="count"/> votes):</span>
   </label>
-  <div class="star-rating"
-      tal:attributes="style string:width:${base_width}px;">
+  <div class="number-rating">
     <div class="current-rating"
-        tal:define="width python:(context.averageRating/count)*100"
-        tal:attributes="style string:width:${width}%;"
-        tal:content="context/averageRating">
-      Currently 3/5 Stars.
+        tal:content="python: '%.1f' % context.averageRating">
+      3 up / 5 down.
     </div>
   </div>
 
@@ -36,6 +33,7 @@
   <label i18n:translate="your_rating">
     Your vote:
   </label>
+ 
   <a class="DeleteRating"
      href=""
      title="Delete vote"
@@ -52,36 +50,24 @@
      tal:condition="python:current is None">
     Not voted yet
   </span>
-  <ul class="star-rating"
+  <p class="rating"
       tal:attributes="style string:width:${base_width}px;">
 
-    <li class="current-rating"
-        tal:define="width python:((current or 0)/count)*100"
-        tal:attributes="style string:width:${width}%;
-                        title current;"
-        tal:content="current">
-      3 up/5 down.
-    </li>
     <tal:repeat tal:repeat="value values">
-      <!-- The first link takes up the full length each subsequent one
-           takes less, but has a higher z-index
-      -->
-      <li>
+      <span>
         <a href="#"
            class="rate star-1"
            title="Up"
            tal:define="iter repeat/value/number;
-                       z_index python:count - iter + 1;
-                       width python:100 - (float(count - iter)/count)*100;"
+                       selected python: current==value.value and 'selected' or 'unselected'"
            tal:attributes="href string:${view_url}/rate?value=${value/value};
                            title value/title;
-                           class string:rate star-${value/value};
-                           style string:width: ${width}%;; z-index: ${z_index};"
-           tal:content="value/value">
+                           class string:rate star-${value/value} ${selected};"
+           tal:content="value/title">
           up
         </a>
-      </li>
+      </span>
     </tal:repeat>
-  </ul>
+  </p>
 </div>
 </div>
