@@ -20,6 +20,16 @@
           (<span tal:omit-tag=""
                    tal:content="context/numberOfRatings"/>)</span>
   </label>
+  <div class="star-rating"
+      tal:attributes="style string:width:${base_width}px;">
+    <div class="current-rating"
+        tal:define="width python:(context.averageRating/count)*100"
+        tal:attributes="style string:width:${width}%;"
+        tal:content="context/averageRating">
+      Currently 3/5 Stars.
+    </div>
+  </div>
+
 </div>
 <div class="UserRating"
      tal:condition="view/can_rate">
