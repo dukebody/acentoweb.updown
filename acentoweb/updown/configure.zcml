@@ -37,7 +37,7 @@
   <contentratings:category
       for="Products.CMFCore.interfaces.IDynamicType"
       title="UpDown"
-      name="acentoweb.updown.UpDownCategory"
+      name="up_down"
       view_name="updown_view"
       read_expr="python: checkPermission('Content Ratings: View User Rating', context)"
       write_expr="python: checkPermission('Content Ratings: User Rate', context)"
