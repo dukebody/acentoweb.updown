@@ -65,7 +65,7 @@
                        width python:100 - (float(count - iter)/count)*100;"
            tal:attributes="href string:${view_url}/rate?value=${value/value};
                            title value/title;
-                           class string:rate star-${iter};
+                           class string:rate star-${value/value};
                            style string:width: ${width}%;; z-index: ${z_index};"
            tal:content="value/value">
           up
