@@ -1,0 +1,46 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-12-26 13:28+0000\n"
+"PO-Revision-Date: 2010-12-26 14:30+0100\n"
+"Last-Translator: Israel Saeta Pérez <israel@acentoweb.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: es\n"
+"Language-Name: Spanish\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: acentoweb.updown\n"
+
+#: ./updown.pt:53
+msgid "Delete my vote"
+msgstr "Borrar mi voto"
+
+#: ./updown.pt:53
+msgid "Delete vote"
+msgstr "Borrar voto"
+
+#: ./vocabulary.py:8
+msgid "Down"
+msgstr "Abajo"
+
+#: ./updown.pt:62
+msgid "Not voted yet"
+msgstr "No se ha votado aún"
+
+#: ./vocabulary.py:7
+msgid "Up"
+msgstr "Arriba"
+
+#. Default: "(${count} votes):"
+#: ./updown.pt:17
+msgid "user_vote_count"
+msgstr "(${count} votos):"
+
+#. Default: "Your vote:"
+#: ./updown.pt:28
+msgid "your_rating"
+msgstr "Tu voto:"
+
