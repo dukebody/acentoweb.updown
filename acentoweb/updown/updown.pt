@@ -7,34 +7,50 @@
                  count python:len(values);
                  base_width python:count*star_size;
                  cat_name python:context.name or '_default'"
-     tal:attributes="class python:'Rating' + (star_size &lt;= 12 and ' small-star' or '') + ' kssattr-category-' + cat_name;
+     tal:attributes="class python:'Rating' + ' kssattr-category-' + cat_name;
                      id string:rating-stars-view-${cat_name};">
 
-<div class="AverageRating"
-     tal:condition="context/can_read">
+<div tal:condition="context/can_read">
   <label>
-    <span class="RatingTitle">Average</span>
-    <span class="VoteCount"
-          i18n:translate="user_vote_count">
+    <span>Average</span>
+    <span i18n:translate="user_vote_count">
           (<span tal:omit-tag=""
                    tal:content="context/numberOfRatings"
-                   i18n:name="count"/> votes):</span>
+                   i18n:name="count"/> votes): </span>
   </label>
-  <div class="number-rating">
-    <div class="current-rating"
-        tal:content="python: '%.1f' % context.averageRating">
+  <div class="current-average"
+       tal:content="python: '%.1f' % context.averageRating">
       3 up / 5 down.
-    </div>
   </div>
 
 </div>
-<div class="UserRating"
-     tal:condition="view/can_rate">
+<div tal:condition="view/can_rate">
   <label i18n:translate="your_rating">
     Your vote:
   </label>
- 
-  <a class="DeleteRating"
+
+  <p class="voting"
+      tal:attributes="style string:width:${base_width}px;">
+
+    <tal:repeat tal:repeat="value values">
+      <span>
+        <a href="#"
+           class="vote vote-1"
+           title="Up"
+           tal:define="iter repeat/value/number;
+                       selected python: current==value.value and 'selected' or 'unselected'"
+           tal:attributes="href string:${view_url}/rate?value=${value/value};
+                           title value/title;
+                           class string:vote star-${value/value} ${selected};"
+           tal:content="value/title">
+          up
+        </a>
+      </span>
+    </tal:repeat>
+  </p>
+
+
+  <a class="DeleteVote"
      href=""
      title="Delete vote"
      i18n:translate=""
@@ -43,31 +59,13 @@
      tal:attributes="href string:${view_url}/remove_rating">
     Delete my vote
   </a>
-  <span class="DeleteRating Disabled"
+  <span class="DeleteVote Disabled"
      title="Not voted yet"
      i18n:translate=""
      i18n:attributes="title"
      tal:condition="python:current is None">
     Not voted yet
   </span>
-  <p class="rating"
-      tal:attributes="style string:width:${base_width}px;">
 
-    <tal:repeat tal:repeat="value values">
-      <span>
-        <a href="#"
-           class="rate star-1"
-           title="Up"
-           tal:define="iter repeat/value/number;
-                       selected python: current==value.value and 'selected' or 'unselected'"
-           tal:attributes="href string:${view_url}/rate?value=${value/value};
-                           title value/title;
-                           class string:rate star-${value/value} ${selected};"
-           tal:content="value/title">
-          up
-        </a>
-      </span>
-    </tal:repeat>
-  </p>
 </div>
 </div>

@@ -1,3 +1,42 @@
-.Rating a.selected {
-    font-weight: bold;
+.Rating label {
+    float: left;
+    line-height: normal;
+}
+
+.Rating a.vote, .Rating .DeleteVote {
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+    text-indent: -1000em;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border-bottom: none !important;
+}
+
+.Rating a.vote.star-1.selected {
+    background-image: url(++resource++acentoweb.updown.resources/up.png);
+}
+
+.Rating a.vote.star--1.selected {
+    background-image: url(++resource++acentoweb.updown.resources/down.png);
+}
+
+.Rating a.vote.star-1.unselected {
+    background-image: url(++resource++acentoweb.updown.resources/up-unselected.png);
+}
+
+.Rating a.vote.star--1.unselected {
+    background-image: url(++resource++acentoweb.updown.resources/down-unselected.png);
+}
+
+.Rating .DeleteVote {
+    background-image: url(++resource++acentoweb.updown.resources/cross.png);
+    margin-left: 8px;
+}
+
+.Rating .DeleteVote.Disabled {
+    background-image: url(++resource++acentoweb.updown.resources/cross-unavailable.png);
+    margin-left: 8px;
 }
